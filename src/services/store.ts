@@ -11,6 +11,7 @@ import feedReducer from './slices/feedSlice';
 import ordersReducer from './slices/ordersSlice';
 import userReducer from './slices/userSlice';
 import orderReducer from './slices/orderSlice';
+import orderDetailsReducer from './slices/orderDetailsSlice';
 
 const rootReducer = {
   ingredients: ingredientsReducer,
@@ -18,7 +19,8 @@ const rootReducer = {
   feed: feedReducer,
   orders: ordersReducer,
   user: userReducer,
-  order: orderReducer
+  order: orderReducer,
+  orderDetails: orderDetailsReducer
 };
 
 const store = configureStore({

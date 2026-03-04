@@ -1,19 +1,40 @@
-import { FC, useMemo } from 'react';
+import { FC, useMemo, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
-import { useAppSelector } from '../../services/store';
+import { useAppDispatch, useAppSelector } from '../../services/store';
 import { Preloader } from '../ui/preloader';
 import { OrderInfoUI } from '../ui/order-info';
 import { TIngredient } from '@utils-types';
+import {
+  fetchOrderByNumber,
+  clearOrderDetails
+} from '../../services/slices/orderDetailsSlice';
 
 export const OrderInfo: FC = () => {
   const { number } = useParams<{ number: string }>();
+  const dispatch = useAppDispatch();
+
   const { orders: feedOrders } = useAppSelector((state) => state.feed);
   const { orders: userOrders } = useAppSelector((state) => state.orders);
+  const { order: loadedOrder, loading } = useAppSelector(
+    (state) => state.orderDetails
+  );
   const { ingredients } = useAppSelector((state) => state.ingredients);
 
-  const orderData = [...feedOrders, ...userOrders].find(
+  const existingOrder = [...feedOrders, ...userOrders].find(
     (order) => order.number === Number(number)
   );
+
+  useEffect(() => {
+    if (!existingOrder && number) {
+      dispatch(fetchOrderByNumber(Number(number)));
+    }
+
+    return () => {
+      dispatch(clearOrderDetails());
+    };
+  }, [number, existingOrder, dispatch]);
+
+  const orderData = existingOrder || loadedOrder;
 
   const orderInfo = useMemo(() => {
     if (!orderData || !ingredients.length) return null;
@@ -55,7 +76,7 @@ export const OrderInfo: FC = () => {
     };
   }, [orderData, ingredients]);
 
-  if (!orderInfo) {
+  if (loading || !orderInfo) {
     return <Preloader />;
   }
 
