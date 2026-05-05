@@ -1,0 +1,19 @@
+{
+  "success": true,
+  "data": [
+    {
+      "_id": "1",
+      "name": "Краторная булка N-200i",
+      "type": "bun",
+      "price": 100,
+      "image": "image.jpg"
+    },
+    {
+      "_id": "2",
+      "name": "Соус",
+      "type": "sauce",
+      "price": 50,
+      "image": "image.jpg"
+    }
+  ]
+}

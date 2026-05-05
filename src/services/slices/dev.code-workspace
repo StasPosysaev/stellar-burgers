@@ -1,0 +1,25 @@
+{
+	"folders": [
+		{
+			"path": "../../../.."
+		},
+		{
+			"path": "../../../../../webpack-react"
+		},
+		{
+			"path": "../../../../../react-with-ts"
+		},
+		{
+			"path": "../../../../../Vite-react"
+		},
+		{
+			"path": "../../../../../my-storybook-app"
+		},
+		{
+			"path": "../../../../../redux-project"
+		}
+	],
+	"settings": {
+		"liveServer.settings.multiRootWorkspaceName": "dev"
+	}
+}

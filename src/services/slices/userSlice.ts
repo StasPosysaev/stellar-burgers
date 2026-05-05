@@ -13,7 +13,7 @@ import {
 import { deleteCookie, setCookie } from '../../utils/cookie';
 import { TUser } from '@utils-types';
 
-interface UserState {
+export interface UserState {
   user: TUser | null;
   isAuthChecked: boolean;
   error: string | null;
