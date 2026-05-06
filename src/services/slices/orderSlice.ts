@@ -3,7 +3,7 @@ import { orderBurgerApi } from '@api';
 import { TOrder } from '@utils-types';
 import { resetConstructor } from './constructorSlice';
 
-interface OrderState {
+export interface OrderState {
   orderRequest: boolean;
   orderModalData: TOrder | null;
   error: string | null;
