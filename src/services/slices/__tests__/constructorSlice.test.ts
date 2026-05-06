@@ -83,7 +83,10 @@ describe('constructorSlice', () => {
 
     it('не должен удалять другие ингредиенты', () => {
       // Добавляем два ингредиента
-      let state = constructorReducer(initialState, addIngredient(mockIngredient));
+      let state = constructorReducer(
+        initialState,
+        addIngredient(mockIngredient)
+      );
       const secondIngredient = { ...mockIngredient, _id: 'test-id-2' };
       state = constructorReducer(state, addIngredient(secondIngredient));
 
@@ -100,24 +103,38 @@ describe('constructorSlice', () => {
   describe('moveIngredient', () => {
     it('должен перемещать ингредиент вверх', () => {
       // Добавляем три ингредиента
-      let state = constructorReducer(initialState, addIngredient(mockIngredient));
-      const secondIngredient = { ...mockIngredient, _id: 'test-id-2', name: 'Second' };
+      let state = constructorReducer(
+        initialState,
+        addIngredient(mockIngredient)
+      );
+      const secondIngredient = {
+        ...mockIngredient,
+        _id: 'test-id-2',
+        name: 'Second'
+      };
       state = constructorReducer(state, addIngredient(secondIngredient));
-      const thirdIngredient = { ...mockIngredient, _id: 'test-id-3', name: 'Third' };
+      const thirdIngredient = {
+        ...mockIngredient,
+        _id: 'test-id-3',
+        name: 'Third'
+      };
       state = constructorReducer(state, addIngredient(thirdIngredient));
 
-      const idsBefore = state.ingredients.map(i => i._id);
+      const idsBefore = state.ingredients.map((i) => i._id);
       expect(idsBefore).toEqual(['test-id-1', 'test-id-2', 'test-id-3']);
 
       // Перемещаем ингредиент с позиции 2 на позицию 1
       state = constructorReducer(state, moveIngredient({ from: 2, to: 1 }));
 
-      const idsAfter = state.ingredients.map(i => i._id);
+      const idsAfter = state.ingredients.map((i) => i._id);
       expect(idsAfter).toEqual(['test-id-1', 'test-id-3', 'test-id-2']);
     });
 
     it('должен перемещать ингредиент вниз', () => {
-      let state = constructorReducer(initialState, addIngredient(mockIngredient));
+      let state = constructorReducer(
+        initialState,
+        addIngredient(mockIngredient)
+      );
       const secondIngredient = { ...mockIngredient, _id: 'test-id-2' };
       state = constructorReducer(state, addIngredient(secondIngredient));
       const thirdIngredient = { ...mockIngredient, _id: 'test-id-3' };
@@ -126,7 +143,7 @@ describe('constructorSlice', () => {
       // Перемещаем ингредиент с позиции 0 на позицию 1
       state = constructorReducer(state, moveIngredient({ from: 0, to: 1 }));
 
-      const ids = state.ingredients.map(i => i._id);
+      const ids = state.ingredients.map((i) => i._id);
       expect(ids).toEqual(['test-id-2', 'test-id-1', 'test-id-3']);
     });
   });
